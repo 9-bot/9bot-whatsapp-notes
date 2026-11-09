@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eight seats per group: who the official WhatsApp Groups API really serves</title>
+<meta name="description" content="The participant cap, account requirements and missing features of Meta&#x27;s Groups API, and how it compares with running large business groups.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Eight seats per group: who the official WhatsApp Groups API really serves">
+<meta property="og:description" content="The participant cap, account requirements and missing features of Meta&#x27;s Groups API, and how it compares with running large business groups.">
+<meta property="og:image" content="og.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>body{max-width:760px;margin:40px auto;padding:0 20px;font:17px/1.6 system-ui,sans-serif;color:#111}h1{line-height:1.25}img{max-width:100%;height:auto}a{color:#0a58ca}</style>
+</head>
+<body>
+<article>
+<h1>Eight seats per group: who the official WhatsApp Groups API really serves</h1>
+<p>When a company hears that Meta has an official Groups API, the first assumption is often that it can run customer communities, reseller networks or partner groups through code. The documentation, checked on November 6, 2026, describes something much narrower.</p>
+<h2>The core limits</h2>
+<ul>
+<li>Access is limited to Cloud API numbers holding Official Business Account (OBA) status.</li>
+<li>A group holds at most 8 participants.</li>
+<li>A number can run up to 10,000 such groups.</li>
+<li>People join only through an invite link; the API cannot add anyone directly.</li>
+<li>Pricing is per message, under Meta's rate card.</li>
+</ul>
+<h2>The OBA hurdle</h2>
+<p>Meta grants OBA status to verified businesses that, among other criteria, follow the Business Messaging Policy, have been on the platform for at least 30 days, have a verified business portfolio, use two-step verification and have an approved display name. Employee numbers, test accounts and Business app numbers are excluded, and a rejected request means waiting 30 days to reapply.</p>
+<p><a href="https://9bot.com.br/en/whatsapp-groups-api/"><img src="https://9bot.com.br/wp-content/uploads/2026/10/Reports-that-show-the-return-on-your-communities-EN.gif" width="728" height="90" alt="Reports that show the return on your communities"></a></p>
+<h2>What API groups cannot do</h2>
+<p>Voice and video calls, disappearing or view once content, button and list messages, and the option to hide the participant list are all unsupported. The gap that matters most for operations: messages cannot be edited or deleted. So the API cannot remove a spam link or an insult, which rules it out as a moderation tool.</p>
+<h2>Where it fits</h2>
+<p>Small service conversations where a few people need the same thread: a customer with an account manager and a supervisor, a support case with vendor and technician, or onboarding a B2B client with the project team.</p>
+<h2>Where it does not</h2>
+<p>Communities of buyers, distributors or staff that run into the dozens or hundreds. Those still live in regular WhatsApp groups and communities. Tools like 9bot connect to the admin number as a linked device, by QR code or pairing code, and handle moderation, scheduling, welcomes and reports. That is not the Cloud API, and WhatsApp does not allow bulk or automated blasting, so automation should organize groups rather than spam them.</p>
+<h2>A three question test</h2>
+<p>More than 8 people per group? The API is out. No OBA or developers? Out as well. Need to delete messages? Out again.</p>
+<p>The pricing rules and comparison tables are in <a href="https://9bot.com.br/en/whatsapp-groups-api/">9bot's breakdown of the WhatsApp Groups API</a>. 9bot is an independent paid service with a 7 day trial; Meta does not endorse it.</p>
+</article>
+</body>
+</html>

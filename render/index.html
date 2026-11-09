@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two WhatsApp MCP servers, two different jobs for your AI assistant</title>
+<meta name="description" content="How Meta&#x27;s WhatsApp Business Tools MCP and the 9bot MCP server differ in purpose, authentication and scope, with examples for business teams.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Two WhatsApp MCP servers, two different jobs for your AI assistant">
+<meta property="og:description" content="How Meta&#x27;s WhatsApp Business Tools MCP and the 9bot MCP server differ in purpose, authentication and scope, with examples for business teams.">
+<meta property="og:image" content="og.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>body{max-width:760px;margin:40px auto;padding:0 20px;font:17px/1.6 system-ui,sans-serif;color:#111}h1{line-height:1.25}img{max-width:100%;height:auto}a{color:#0a58ca}</style>
+</head>
+<body>
+<article>
+<h1>Two WhatsApp MCP servers, two different jobs for your AI assistant</h1>
+<p>MCP (Model Context Protocol) is an open specification through which an AI assistant reaches external tools in a structured way, within the permissions it has been granted. For WhatsApp there are now two MCP servers, and comparing them as better or worse misses the point. They operate different layers.</p>
+<h2>Meta's server: setting up the platform</h2>
+<p>Meta's offering, called WhatsApp Business Tools MCP, is still in beta, runs remotely and authenticates through Meta OAuth. Its documented scope: finding business accounts, registering and verifying numbers, managing templates, sending messages (open text within the 24 hour customer window, otherwise templates) and setting up webhooks. Meta positions it for development and testing, not large scale production sending. Group and community tools are not listed.</p>
+<h2>The 9bot server: running groups day to day</h2>
+<p>The 9bot MCP server is aimed at the groups and communities of a company's own number, linked by pairing code or QR code. Its published toolsets cover groups, reports, workflows, messages, schedules, automations, moderation, integrations, community and jobs. New applications start with Groups, Reports and Workflows enabled.</p>
+<p><a href="https://9bot.com.br/en/whatsapp-mcp-meta-vs-9bot/"><img src="https://9bot.com.br/wp-content/uploads/2026/10/Strategic-decisions-based-on-your-communities-real-engagement-EN.gif" width="728" height="90" alt="Strategic decisions based on your communities real engagement"></a></p>
+<h2>Guardrails on the 9bot side</h2>
+<ul>
+<li>OAuth 2.1 with scopes, so each client holds only approved permissions.</li>
+<li>Group level control: an application sees only the groups it was authorized for.</li>
+<li>Allowlists and denylists of tools, plus read only applications.</li>
+<li>A preview and a single use confirmation before sensitive actions.</li>
+<li>Policies that block, mask or allow sensitive data.</li>
+<li>A full audit trail of actions.</li>
+</ul>
+<h2>Practical examples</h2>
+<p>A developer uses Meta's server to create a test number, draft a template and validate a Cloud API webhook during an integration project. On the 9bot side, a community lead has Claude pull a weekly activity summary covering all customer groups, the marketing team asks ChatGPT to set up a workflow that posts a Friday reminder, and operations connect group commands to a CRM.</p>
+<p>Nothing stops a company from using both: Meta's stack for individual customer conversations, 9bot for the group side.</p>
+<p>The side by side table, including tool counts per toolset, is in <a href="https://9bot.com.br/en/whatsapp-mcp-meta-vs-9bot/">9bot's comparison of WhatsApp MCP options</a>. 9bot is a third party product, not official and not a Meta partner, sold by subscription after a 7 day trial period.</p>
+</article>
+</body>
+</html>
