@@ -1,0 +1,65 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Two narrow agents, not one: scoping AI help around a WhatsApp cohort&#x27;s retention loop</title><link rel="canonical" href="https://9bot.com.br/en/whatsapp-student-community-retention/"><meta name="description" content="Teams that run several paid cohorts are starting to put AI assistants next to their group tooling. The temptation is a single agent that can read everythin"><style>body{font-family:Georgia,serif;max-width:760px;margin:40px auto;padding:0 18px;line-height:1.6;color:#111}table{border-collapse:collapse;width:100%}td,th{border:1px solid #999;padding:6px;font-size:14px}pre{background:#f4f4f4;padding:10px;white-space:pre-wrap;font-size:13px}img{max-width:100%}h1{line-height:1.25}</style></head><body><h1>Two narrow agents, not one: scoping AI help around a WhatsApp cohort&#x27;s retention loop</h1>
+<p>Teams that run several paid cohorts are starting to put AI assistants next to their group tooling. The temptation is a single agent that can read everything and post anywhere. For a retention loop that is the wrong shape. The loop has a read side (who went quiet) and a write side (what gets said to the group), and they deserve separate scopes.</p>
+<p>This note applies least privilege to the routine described in <a href="https://9bot.com.br/en/whatsapp-student-community-retention/">9bot's write up on keeping student communities active</a>. 9bot is a paid subscription with a seven day evaluation period and is independent of Meta; nothing here implies a WhatsApp endorsement.</p>
+<h2>The loop being assisted</h2>
+<p>Weekly, the team reads members inactive for seven days in 9bot Reports, crosses them with course progress, posts an easy milestone and a poll in the group, and hands the remaining silent students to a tutor for a private message. Near the end, Time based Access Control sends a notice before removal.</p>
+<h2>Scope split</h2>
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>May read</th>
+<th>May write</th>
+<th>Must never</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Analyst</td>
+<td>Reports (active, 7 day inactive, exits), course progress export</td>
+<td>A draft summary for the team</td>
+<td>Post in any group, contact a student</td>
+</tr>
+<tr>
+<td>Drafter</td>
+<td>Milestone calendar, command registry</td>
+<td>Draft milestone and poll texts for human approval</td>
+<td>Read member lists, change access periods</td>
+</tr>
+<tr>
+<td>Human tutor</td>
+<td>Everything above</td>
+<td>Private messages, final approval of drafts</td>
+<td>Delegate private outreach to an agent</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://9bot.com.br/en/whatsapp-student-community-retention/"><img alt="Reports banner from 9bot (links to the cohort retention guide)" src="https://9bot.com.br/wp-content/uploads/2026/10/Reports-that-show-the-return-on-your-communities-EN.gif" /></a></p>
+<p>The private message stays with a person for two reasons. It is the step where judgment matters most, and 9bot itself does not send private messages to inactive students; it covers group messages, commands, moderation, reports and timed access.</p>
+<h2>A scope declaration</h2>
+<p>Illustrative only. Adapt it to whatever agent framework or MCP client you use; it does not describe a 9bot configuration file.</p>
+<pre><code class="language-json">{
+  &quot;agents&quot;: {
+    &quot;retention-analyst&quot;: {
+      &quot;read&quot;: [&quot;reports.inactive_7d&quot;, &quot;reports.active&quot;, &quot;reports.exits&quot;, &quot;lms.progress_export&quot;],
+      &quot;write&quot;: [&quot;drafts/weekly-summary.md&quot;],
+      &quot;deny&quot;: [&quot;group.post&quot;, &quot;member.contact&quot;, &quot;access.update&quot;]
+    },
+    &quot;milestone-drafter&quot;: {
+      &quot;read&quot;: [&quot;calendar.milestones&quot;, &quot;commands.registry&quot;],
+      &quot;write&quot;: [&quot;drafts/milestones/*.md&quot;],
+      &quot;deny&quot;: [&quot;reports.*&quot;, &quot;member.*&quot;, &quot;access.*&quot;],
+      &quot;requires_human_approval&quot;: true
+    }
+  }
+}
+</code></pre>
+<h2>Why the split helps</h2>
+<ul>
+<li>A compromised or confused drafter cannot see who is struggling, so it cannot single anyone out in a public post.</li>
+<li>The analyst cannot post, so a bad summary stays a bad document instead of becoming a message to fifty paying customers.</li>
+<li>Member data stays in fewer places. The data protection paper in the series at <a href="https://9-bot.github.io/whatsapp-group-security-research/">9-bot.github.io</a> stresses that group members already see each other's numbers; agents should not widen that surface.</li>
+</ul>
+<h2>Limits</h2>
+<p>The evidence behind the article is a survey published in 2024 in Frontiers in Education, with 309 respondents about to graduate, in groups their institution ran; it ties reciprocity and satisfaction to a stated wish to keep going. Agents do not change that evidence. They only make the weekly routine cheaper to run. Measure completion on the platform before and after.</p>
+</body></html>
