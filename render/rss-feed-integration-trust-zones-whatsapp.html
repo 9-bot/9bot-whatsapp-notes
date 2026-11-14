@@ -1,0 +1,56 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Three trust zones in a feed integration: what the publisher, the bot and the group admin each control</title><link rel="canonical" href="https://9bot.com.br/en/how-to-set-up-rss-feed-whatsapp/"><meta name="description" content="When a B2B publisher wires its RSS feed into a WhatsApp group, three parties end up sharing one pipeline. The publisher controls what enters the feed. The "><style>body{font-family:Georgia,serif;max-width:760px;margin:40px auto;padding:0 18px;line-height:1.6;color:#111}table{border-collapse:collapse;width:100%}td,th{border:1px solid #999;padding:6px;font-size:14px}pre{background:#f4f4f4;padding:10px;white-space:pre-wrap;font-size:13px}img{max-width:100%}h1{line-height:1.25}</style></head><body><h1>Three trust zones in a feed integration: what the publisher, the bot and the group admin each control</h1>
+<p>When a B2B publisher wires its RSS feed into a WhatsApp group, three parties end up sharing one pipeline. The publisher controls what enters the feed. The bot controls when and how much leaves for the group. The group admin controls who reads and who may speak. Reviews go faster when each zone has an owner and a short list of things it must never do.</p>
+<p>Product steps are in <a href="https://9bot.com.br/en/how-to-set-up-rss-feed-whatsapp/">9bot's walkthrough for RSS on WhatsApp</a>. Billing note: 9bot is subscription based, with a week of evaluation first, and Meta is not involved in it.</p>
+<h2>Zone map</h2>
+<pre><code class="language-text">+------------------+      +--------------------------+      +-----------------------+
+| PUBLISHER ZONE   | ---&gt; | INTEGRATION ZONE (9bot)  | ---&gt; | GROUP ZONE (admins)   |
+| CMS, categories, |      | poll interval, new-item  |      | membership, approval, |
+| feed URL         |      | check, schedule, cap     |      | admins-only setting   |
++------------------+      +--------------------------+      +-----------------------+
+</code></pre>
+<h2>Responsibilities</h2>
+<table>
+<thead>
+<tr>
+<th>Zone</th>
+<th>Owns</th>
+<th>Must never</th>
+<th>Signal it is healthy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Publisher</td>
+<td>Feed content, one feed per category (WordPress: address plus /feed/)</td>
+<td>Push drafts or internal items into a public category</td>
+<td>Feed validates on Verify Feed</td>
+</tr>
+<tr>
+<td>Integration</td>
+<td>Interval in minutes, posting schedule, maximum items per post</td>
+<td>Post outside the agreed windows</td>
+<td>Deliveries arrive only at the set times</td>
+</tr>
+<tr>
+<td>Group admins</td>
+<td>Who joins, who can message, bot admin seat</td>
+<td>Hand admin rights to people who do not need them</td>
+<td>Active members stable, exits flat in Reports</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://9bot.com.br/en/how-to-set-up-rss-feed-whatsapp/"><img alt="9bot banner: automated posting" src="https://9bot.com.br/wp-content/uploads/2026/10/Your-marketing-team-shouldnt-be-posting-one-message-at-a-time-EN.gif" /></a></p>
+<h2>Why the split matters</h2>
+<p><strong>Failures stay local.</strong> A broken category feed is a publisher issue; the integration only reports it. A burst at midnight is an integration issue; the schedule mode fixes it. Replies drowning the news are a group issue; admins-only messaging fixes it.</p>
+<p><strong>Privileges stay small.</strong> The bot needs admin in the group to post, according to the tutorial. People do not all need admin. The 2026 account takeover paper by Ivan Schroll (DOI 10.17605/OSF.IO/HZUN5) explains why: whoever hijacks an admin account inherits that account's power over the group.</p>
+<p><strong>Costs stay predictable.</strong> If the integration zone is built on Zapier or Make instead, it becomes metered: tasks per completed action on Zapier, credits per module action on Make, plus a third party connector for the WhatsApp leg. In the 9bot case the zone is a flat plan (US$35 a month for three months, then US$70, per the article).</p>
+<h2>Out of scope: Channels</h2>
+<p>There is no fourth zone for WhatsApp Channels in this design. The walkthrough says Channels lack feed reading and are not reachable through the Meta API for posting, as checked on 9 October 2026.</p>
+<h2>Review questions</h2>
+<ol>
+<li>Which category feed does this group receive, and who at the publisher owns it?</li>
+<li>Which schedule mode is set: a fixed interval, custom times, or the two default slots (06:00, 18:00)?</li>
+<li>What is the cap per delivery, and who chose it?</li>
+<li>Who are the human admins, and when was the list last trimmed?</li>
+<li>When were Reports last read for this group?</li>
+</ol></body></html>
